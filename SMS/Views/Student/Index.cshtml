@@ -1,0 +1,300 @@
+﻿@model IEnumerable<SMS.Models.Data.Models.Student>
+
+<h1 class="text-center"><i class="fas fa-comments-dollar text-success"></i> Student Historey</h1>
+
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th class="hide">
+                @Html.DisplayNameFor(model => model.ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstMidName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CNICBform)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodGroup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photo)
+            </th>
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",null,Context.Request.Scheme)','New Transaction')" class="btn btn-success text-white"><i class="fas fa-random"></i> New Transaction</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstMidName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CNICBform)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodGroup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Photo)
+                </td>
+               @* <td>
+                    @Html.DisplayFor(modelItem => item.Islam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BloodGroup)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PermanentAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Photo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FatherCNIC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FamilyMonthlyIncome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HafizEQuran)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaritalStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuardianContactNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nationality)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DomicileDistrict)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDate)
+                </td>*@
+                <td>
+                    <div>
+                        <a onclick="showInPopup('@Url.Action("AddOrEdit","Transaction",new {id=item.ID},Context.Request.Scheme)','Update Transaction')" class="btn btn-info text-white"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <form asp-action="Delete" asp-route-id="@item.ID" onsubmit="return jQueryAjaxDelete(this)" class="d-inline">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+@*<div class="container">  
+        <h2>Employees Record</h2>   
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New Employee</button><br /><br />  
+        <table class="table table-bordered table-hover">  
+            <thead>  
+                <tr>  
+                    <th>  
+                        ID  
+                    </th>  
+                    <th>  
+                        Name  
+                    </th>  
+                    <th>  
+                        Age  
+                    </th>  
+                    <th>  
+                        State  
+                    </th>  
+                    <th>  
+                        Country  
+                    </th>  
+                    <th>  
+                        Action  
+                    </th>  
+                </tr>  
+            </thead>  
+            <tbody class="tbody">  
+  
+            </tbody>  
+        </table>  
+    </div>  
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+        <div class="modal-dialog">  
+            <div class="modal-content">  
+                <div class="modal-header">  
+                    <button type="button" class="close" data-dismiss="modal">×</button>  
+                    <h4 class="modal-title" id="myModalLabel">Add Employee</h4>  
+                </div>  
+                <div class="modal-body">  
+                    <form>  
+                        <div class="form-group">  
+                            <label for="EmployeeId">ID</label>  
+                            <input type="text" class="form-control" id="stdID" placeholder="Id" disabled="disabled"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdLastName">Last Name</label>  
+                            <input type="text" class="form-control" id="stdLastName" placeholder="Last Name"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdFirstMidName">First MidName</label>  
+                            <input type="text" class="form-control" id="stdFirstMidName" placeholder="First MidName" />  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdEnrollmentDate">Enrollment Date</label>  
+                            <input type="datetime" class="form-control" id="stdEnrollmentDate" placeholder="Enrollment Date"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdCNICBform">CNIC-B-Form</label>  
+                            <input type="text" class="form-control" id="stdCNICBform" placeholder="CNIC-B-Form"/>  
+                        </div>  
+                         <div class="form-group">  
+                            <label for="Father Name">stdFatherName</label>  
+                            <input type="text" class="form-control" id="stdFatherName" placeholder="Father Name"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdFatherOccupation">Father Occupation</label>  
+                            <input type="text" class="form-control" id="stdFatherOccupation" placeholder="Father Occupation" />  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdGender">Gender</label>  
+                            <input type="text" class="form-control" id="stdGender" placeholder="Gender"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdIslam">Islam</label>  
+                            <input type="text" class="form-control" id="stdIslam" placeholder="Islam"/>  
+                        </div>  
+                         <div class="form-group">  
+                            <label for="stdBloodGroup">stdBloodGroup</label>  
+                            <input type="text" class="form-control" id="stdBloodGroup" placeholder="Name"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdMobileNo">stdMobileNo</label>  
+                            <input type="text" class="form-control" id="stdMobileNo" placeholder="Mobile No" />  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdEmailAddress">stdEmailAddress</label>  
+                            <input type="text" class="form-control" id="stdEmailAddress" placeholder="Email Address"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdProvice">Provice</label>  
+                            <input type="text" class="form-control" id="stdProvice" placeholder="Provice"/>  
+                        </div>  
+                         <div class="form-group">  
+                            <label for="stdPermanentAddress">Permanent Address</label>  
+                            <input type="text" class="form-control" id="stdPermanentAddress" placeholder="stdPermanentAddress"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdPostalAddress">Postal Address</label>  
+                            <input type="text" class="form-control" id="stdPostalAddress" placeholder="stdPostalAddress" />  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdPhoto">Photo</label>  
+                            <input type="text" class="form-control" id="stdPhoto" placeholder="stdPhoto"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdFatherCNIC">Father CNIC</label>  
+                            <input type="text" class="form-control" id="stdFatherCNIC" placeholder="Father CNIC"/>  
+                        </div>  
+                         <div class="form-group">  
+                            <label for="stdFamilyMonthlyIncome">Family Monthly Income</label>  
+                            <input type="text" class="form-control" id="stdFamilyMonthlyIncome" placeholder="Family Monthly Income"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdDateOfBirth">Date Of Birth</label>  
+                            <input type="datetime" class="form-control" id="stdDateOfBirth" placeholder="stdDateOfBirth" />  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdHafizEQuran">Hafiz EQuran</label>  
+                            <input type="text" class="form-control" id="stdHafizEQuran" placeholder="Hafiz-E-Quran"/>  
+                        </div>  
+                        <div class="form-group">  
+                            <label for="stdMaritalStatus">Marital Status</label>  
+                            <input type="text" class="form-control" id="stdMaritalStatus" placeholder="Marital Status"/>  
+                        </div>
+                        <div class="form-group">  
+                            <label for="stdGuardianContactNo">stdGuardianContactNo</label>  
+                            <input type="number" class="form-control" id="stdGuardianContactNo" placeholder="Guardian Contact No"/>  
+                        </div>
+                        <div class="form-group">  
+                            <label for="stdNationality">stdNationality</label>  
+                            <input type="text" class="form-control" id="stdNationality" placeholder="Nationality"/>  
+                        </div>
+                        <div class="form-group">  
+                            <label for="stdDomicileDistrict">Domicile District</label>  
+                            <input type="text" class="form-control" id="stdDomicileDistrict" placeholder="Domicile District"/>  
+                        </div>
+                        <div class="form-group">  
+                            <label for="stdCreateDate">stdCreateDate</label>  
+                            <input type="datetime" class="form-control" id="stdCreateDate" placeholder="CreateDate"/>  
+                        </div>
+                        <div class="form-group">  
+                            <label for="stdUpdateDate">UpdateDate</label>  
+                            <input type="datetime" class="form-control" id="stdUpdateDate" placeholder="UpdateDate"/>  
+                        </div>  
+                    </form>  
+                </div>  
+                <div class="modal-footer">  
+                    <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add();">Add</button>  
+                    <button type="button" class="btn btn-primary" id="btnUpdate" style="display:none;" onclick="Update();">Update</button>  
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                </div>  
+            </div>  
+        </div>          
+    </div> *@
+<script src="~/lib/jquery/dist/jquery.min.js"></script>  
+<script src="~/lib/jquery/dist/jquery.js"></script>   
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>  
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>  
+<script src="~/lib/bootstrap/dist/"></script>  
+<script src="~/lib/bootstrap/dist/"></script>  
+<script src="~/js/Student/Student.js"></script>
